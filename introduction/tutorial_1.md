@@ -1,5 +1,5 @@
 ---
-title: Tutorial 1: A Simple Badge
+title: "Tutorial 1: A Simple Badge"
 summary: An absolute beginner's guide to coding an app for Badgeware.
 icon: build
 publish: true
@@ -127,7 +127,7 @@ And we should see that the screen is now navy blue. The screen here is actually 
 
 So far so good, but let's create a border. Keeping the code we already had, let's change our pen colour and draw a rectangle in the centre of the screen. To do that we need to work out the x and y position of its top left corner, as well as its width and height. Now we could just calculate those values ourselves and enter them in as numbers, but there's a smarter way of doing it, which will allow it to work on any shape and size of screen.
 
-> Note: Badger and Blinky users might want to tweak the border thickness and colours here to suit their unit. 
+> Note: Badger and Blinky users might want to tweak the border thickness and colours here to suit their unit.
 
 ```python
 # We're setting our screen border thickness as a variable right up at the top, since it's not going to change between different loops of update().
@@ -436,7 +436,7 @@ If you add that in right after the button check, you'll see it fixes the problem
 
 Note that we've also changed that greater than sign to an equal or greater than sign - the list as we've written it is seven elements long and that's what `len()` returns, but because the list index starts at zero we need to loop around after index six.
 
-Now we've got that, let's add the same to make the Down button subtract from selected_mood, and reset it to the list length minus one whenever it goes below 0. Note that we're using `elif`, so we're only checking the down button if the up button's not pressed. That clears up any ambiguity as to what might happen if both buttons were pressed. It doesn't really matter here, but it's good to get into the habit of thinking about as it's important in more complex programs. 
+Now we've got that, let's add the same to make the Down button subtract from selected_mood, and reset it to the list length minus one whenever it goes below 0. Note that we're using `elif`, so we're only checking the down button if the up button's not pressed. That clears up any ambiguity as to what might happen if both buttons were pressed. It doesn't really matter here, but it's good to get into the habit of thinking about as it's important in more complex programs.
 
 ```python
 screen_border = 5
