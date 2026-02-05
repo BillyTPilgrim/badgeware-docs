@@ -129,14 +129,16 @@ def update():
     # the screen, we want its top left corner to be at half of the
     # screen's width, minus half of the picture's width.
     picture_x = (screen.width / 2) - (picture_size / 2)
-    # The top corner's y coordinate is just the border width, nice and simple.
+    # The top corner's y coordinate is just the border width,
+    # nice and simple.
     picture_y = screen_border
     # And then just like the border rectangle, we put all of these
     # together in a rect.
     picture_rect = rect(picture_x, picture_y, picture_size, picture_size)
 
     # Finally, we'll use screen.blit() to "paint" that image onto
-    # our screen, passing it the image we loaded and the rect we just made as parameters.
+    # our screen, passing it the image we loaded and the rect we just
+    # made as parameters.
     screen.blit(picture, picture_rect)
 ```
 
@@ -313,7 +315,8 @@ def update():
 
     # Checking for a button press...
     if io.BUTTON_UP in io.pressed:
-        # The += here is just a quicker way of saying selected_mood = selected_mood + 1.
+        # The += here is just a quicker way of saying
+        # selected_mood = selected_mood + 1.
         selected_mood += 1
 
     screen.pen = color.navy
