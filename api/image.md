@@ -5,8 +5,9 @@ icon: image
 publish: true
 ---
 # Introduction
-Images can be either true colour (RGBA) or paletted (up to 256 colours).
-Because available RAM is limited to 8MB, it’s recommended to use paletted images whenever possible — they use roughly one quarter of the memory compared to true colour images.
+The `image` type is the core graphics primitive in Badgeware. Images are true colour (RGBA) pixel buffers that support drawing shapes, text, and blitting sprites.
+
+A global image instance called `screen` represents the device framebuffer. All rendering to the display is done by drawing to `screen` — whether using primitives like `screen.circle()`, rendering text with `screen.text()`, or compositing sprites with `screen.blit()`.
 
 # Properties
 
@@ -67,7 +68,7 @@ def update():
 ```
 
 ## pen
-The brush used for drawing operations. This can be set to a `brush` object.
+The color or brush used for drawing operations. This can be set to a `brush` or `color` object.
 
 ```python
 def update():
@@ -178,7 +179,7 @@ def update():
   screen.pen = color.lime
   screen.rectangle(20, 30, 20, 20)
 
-  # using full coordinates
+  # using a rect object
   r = rect(70, 50, 40, 40)
   screen.pen = color.red
   screen.rectangle(r)
@@ -189,7 +190,6 @@ def update():
 Draws a filled circle using the current brush.
 
 ### Parameters
-`circle` can be called in two ways:
 
 - `circle(point, radius)`
   - `point` — A `vec2` object containing the centre point
@@ -199,7 +199,7 @@ Draws a filled circle using the current brush.
   - `x, y` — Coordinates of the centre point
   - `radius` - Radius in pixels
 
-### Example code
+### Example
 
 ```python
 def update():
@@ -247,12 +247,12 @@ def update():
 ## triangle
 Draws a filled triangle defined by three vertices.
 
-`triangle` can be called in two ways: by passing three `point` values or by specifying the positions as individual values.
+`triangle` can be called in two ways: by passing three `vec2` values or by specifying the positions as individual values.
 
 ### Parameters
 
-- `triangle(point0, point1, point2)`
-    - `point0, point1, point2` — Coordinates of the triangle vertices
+- `triangle(p0, p1, p2)`
+    - `p0, p1, p2` — Coordinates of the triangle vertices
 
 - `triangle(x0, y0, x1, y1, x2, y2)`
     - `x0, y0` — First vertex of the triangle
@@ -362,7 +362,7 @@ def update():
 ```
 
 # Filters
-Filters are applied to an entire images clipping area.
+Filters are applied to an entire image's clipping area.
 
 ## blur
 Blurs the contents of the image.
@@ -391,8 +391,6 @@ Performs an ordered dither on the image.
 ### Example
 
 ```python
-import math
-
 sprite = image.load("/system/assets/skull.png")
 
 def update():
@@ -407,8 +405,6 @@ Reduces the image to black and white.
 ### Example
 
 ```python
-import math
-
 sprite = image.load("/system/assets/skull.png")
 
 def update():
@@ -424,8 +420,6 @@ Reduces the image to greyscale.
 
 
 ```python
-import math
-
 sprite = image.load("/system/assets/skull.png")
 
 def update():
@@ -496,9 +490,9 @@ Depending on the parameters provided, `blit` can:
 ### Example
 
 ```python
-def update():
-  sprite = image.load("/system/assets/skull.png")
+sprite = image.load("/system/assets/skull.png")
 
+def update():
   # 1:1 blit
   screen.blit(sprite, vec2(10, 10))
 
@@ -567,11 +561,11 @@ The returned image shares its underlying data with the original image. All drawi
 
 ### Parameters
 
-- window(r)
+- `window(r)`
 
     - `r` — A `rect` defining the position and size of the window
 
-- window(x, y, w, h)
+- `window(x, y, w, h)`
 
     - `x, y` — Coordinates of the top-left corner
     - `w, h` — Width and height of the window

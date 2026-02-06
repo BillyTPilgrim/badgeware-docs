@@ -35,6 +35,6 @@ To update your firmware:
 - Connect your badge to your computer via a USB-C cable
 - Hold down the **BOOT** button
 - Tap **RESET**
-- The badge should appear as a disk named "RP2350" onm your computer
+- The badge should appear as a disk named "RP2350" on your computer
 - Drag and drop the new firmware (`.uf2` file) onto this disk
 - Your badge should reboot into the new firmware
