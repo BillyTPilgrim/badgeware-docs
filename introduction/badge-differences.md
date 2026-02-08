@@ -4,7 +4,7 @@ The three different models of Badgeware may have different displays, but behind 
 
 # Resolution
 
-The three models have different screen resolutions. Badger has a 264×276 screen, Tufty 160×120 (or 320×240 in high-resolution mode), and Blinky a 39×26 LED matrix.
+The three models have different screen resolutions. Badger has a 264×176 screen, Tufty 160×120 (or 320×240 in high-resolution mode), and Blinky a 39×26 LED matrix.
 
 You can draw to the screen in exactly the same way on all three, but anything drawn outside the physical screen area will simply not appear.
 
