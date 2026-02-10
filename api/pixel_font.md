@@ -12,75 +12,6 @@ Text is drawn using the currently selected brush, allowing for alpha blending an
 
 Badgeware includes thirty high-quality, licensed pixel fonts created by [somepx](https://somepx.itch.io), giving you plenty of options to add style and character to your applications.
 
-# Drawing text
-
-## text
-Draws text at a specific location.
-
-### Parameters
-
-- `text(text, x, y)`
-    - `text` — The text to draw
-    - `x`, `y` — The position to draw the text
-
-### Example
-
-```python
-# example of how to draw text onto the screen
-import random
-
-screen.font = rom_font.absolute
-
-def update():
-  # draw the message at random locations with alpha blending
-  screen.pen = color.green
-  screen.text("badgeware!", 10, 10)
-```
-
-
-# Measuring text
-
-To determine the size that a piece of text will be once drawn you can use the `measure_text` function. This returns two values, the width and height of the text when it is drawn.
-
-This is useful for aligning text and ensuring that any border around text is drawn at the correct size.
-
-## measure_text
-
-Returns the width and height of the text if it were drawn.
-
-### Parameters
-
-- `measure_text(text)`
-    - `text` — The text to measure
-
-### Returns
-
-- A tuple containing the width and height of the text.
-
-### Example
-
-```python
-screen.font = rom_font.nope
-
-def update():
-  # align some text to the right
-  message = "right aligned"
-  screen.pen = color.blue
-  w, _ = screen.measure_text(message)
-  screen.text(message, screen.width - w, 10)
-
-  message = "centered!"
-  screen.pen = color.lime
-  w, h = screen.measure_text(message)
-  x = (screen.width / 2) - (w / 2)
-  y = (screen.height / 2) - (h / 2)
-  screen.text(message, x, y)
-
-```
-
-> Note: Because `measure_text` returns two values you must provide two variables (or `_` to discard a value) into which those values can be placed.
-
-
 # Properties
 
 ## height
@@ -88,8 +19,6 @@ The height, in pixels, of the fonts glyph bounding box.
 
 ## name
 The name of the pixel font.
-
-
 
 # Font gallery
 
