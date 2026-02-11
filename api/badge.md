@@ -44,6 +44,9 @@ Returns a list of buttons pressed during the current frame - that is, buttons th
 - `.pressed(button)` - Returns a boolean representing the pressed status of the button
         - `button` - Button constant.
 
+### Returns
+A list of button constants if no parameter was specified, otherwise a boolean.
+
 ## released()
 Returns a list of buttons released during the current frame - that is, buttons that switched from pressed last frame to not pressed this frame - or tests a single button.
 
@@ -51,6 +54,9 @@ Returns a list of buttons released during the current frame - that is, buttons t
 - `.released()` - Returns a list of released buttons.
 - `.released(button)` - Returns a boolean representing the released status of the button
         - `button` - Button constant.
+
+### Returns
+A list of button constants if no parameter was specified, otherwise a boolean.
 
 ## held()
 Returns a list of all buttons that are currently held down, or tests a single button.
@@ -60,6 +66,9 @@ Returns a list of all buttons that are currently held down, or tests a single bu
 - `.held(button)` - Returns a boolean representing the held status of the button
         - `button` - Button constant.
 
+### Returns
+A list of button constants if no parameter was specified, otherwise a boolean.
+
 ## changed()
 Returns a list of all buttons whose state changed between the last frame and the current frame, or tests a single button.
 
@@ -67,6 +76,9 @@ Returns a list of all buttons whose state changed between the last frame and the
 - `.changed()` - Returns a list of changed buttons.
 - `.changed(button)` - Returns a boolean representing the changed status of the button
         - `button` - Button constant.
+
+### Returns
+A list of button constants if no parameter was specified, otherwise a boolean.
 
 ### Example
 > Note: Click on the emulator to allow it to capture input. Use the arrow keys and space on your keyboard to try the example out.
@@ -102,14 +114,17 @@ def update():
 ## badge.poll()
 If you are creating your own program without the use of the Badgeware menu and app system, you will need to poll the badge using this method to get updated status on the buttons and other features. If you're working within the Badgeware menu system, `poll()` is called automatically every update and you don't need to use this.
 
+### Returns
+None
+
 # Battery status
 Badgeware includes several methods to allow you to monitor the battery.
 
 ## battery_level()
-Returns the battery level as a percentage from 0 to 100.
+Returns an int representing the battery level as a percentage from 0 to 100.
 
 ## battery_voltage()
-Returns the current battery voltage.
+Returns a float representing the current battery voltage.
 
 ## usb_connected()
 Returns a boolean reflecting whether the USB cable is currently connected.
@@ -128,6 +143,9 @@ When called without a parameter, this returns the colour the display will be cle
 - `.default_clear(color)`
     - `color` - A `color` object specifying the clear colour, or `None` to disable screen clearing.
 
+### Returns
+A `color` or `None` if used without parameters, `None` otherwise.
+
 ## default_pen()
 This is just as `default_clear()`, except that it reads or sets the default colour that `screen.pen` will be set to at the start of every `update()`. Note that this will not accept `None`, only a colour.
 
@@ -135,6 +153,9 @@ This is just as `default_clear()`, except that it reads or sets the default colo
 - `.default_pen()`
 - `.default_pen(color)`
     - `color` - A `color` object specifying the pen colour.
+
+### Returns
+A `color` if used without parameters, `None` otherwise.
 
 ## mode()
 Changes the display mode of the badge. You can apply more than one mode at once, where applicable, by using the pipe symbol, e.g. `badge.mode(HIRES | VSYNC)`.
@@ -149,8 +170,11 @@ Changes the display mode of the badge. You can apply more than one mode at once,
         - `MEDIUM_UPDATE` (Badger only) - a middle ground between the above two.
         - `DITHER` - applies an ordered dither to the framebuffer before writing to the screen, equivalent to running [dither()](/api/image.md#dither) after every update. Available on all models, but most useful for Badger.
 
+### Returns
+`None`
+
 ## resolution()
-Returns the display resolution of the badge as a tuple containing width and height in pixels.
+Returns the display resolution of the badge as a tuple containing pixel width and height as ints.
 
 # Memory
 These methods monitor the badge's flash space and RAM, so you can check how full your Badge is with software and assets.
@@ -161,6 +185,9 @@ These methods monitor the badge's flash space and RAM, so you can check how full
     - Returns a tuple containing total flash size, used flash and free flash in bytes.
 - `.disk_free(mountpoint)`
     - Returns as above, but for the specified mountpoint.
+
+### Returns
+A tuple containing three ints.
 
 ## memory.free(message)
 Prints to console the amount of free RAM, prepended with the message if specified.
@@ -179,8 +206,11 @@ Sets the brightness value for the rear lighting on the badge.
 - `.set_caselights(level1, level2, level3, level4)`
         - `level1`, `level2`, `level3`, `level4` - Brightness to set for each rear LED individually (0-255)
 
+### Returns
+`None`
+
 ## get_caselights()
-Returns a tuple containing the current value of all rear LEDs.
+Returns a tuple containing the current value of all rear LEDs as floats.
 
 ## light_level() [TUFTY ONLY]
 Returns the level detected by the light sensor as a raw u16 value.
