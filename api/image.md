@@ -115,7 +115,7 @@ def update():
 > Note: Badgeware comes with thirty pre-loaded fonts, check out the `pixel_font` article for a full list!
 
 # Drawing
-The drawing API provides a collection of fast, low-level primitives for rendering simple shapes directly into an image’s pixel buffer. These methods are designed for speed and simplicity, making them suitable for real-time graphics, UI elements, and procedural drawing.
+The drawing API provides a collection of fast, low-level primitives for rendering simple shapes directly into an image’s pixel buffer. These methods are designed for speed and simplicity, making them suitable for real-time graphics, UI elements, and procedural drawing. These methods round position and dimension values to the nearest pixel for speed.
 
 You can also render vector shapes using the `shape` method. Vector shapes support sub-pixel positioning. Vector drawing supports antialiasing, controlled by the current antialiasing setting, and uses the currently selected brush for stroke and fill operations unless otherwise stated.
 
@@ -270,7 +270,7 @@ def update():
 ## shape()
 Draws a vector shape (see `shape`) to the image using the current brush and antialiasing settings.
 
-Vector shapes are created using one of the predefined helper methods on the shape type, or by constructing your own custom shapes manually.
+Vector shapes are created using one of the predefined helper methods on the shape type, or by constructing your own custom shapes manually. Unlike the raster drawing above, vector shapes can be dimensioned and positioned with subpixel accuracy at a slight speed cost.
 
 ### Usage
 - `shape(s)`
@@ -566,8 +566,8 @@ blit(source: image, source_rect: rect, dest_rect: rect) -> None
 blit_hspan(source: image, x: int, y: int, c: int, u0: float, v0: float, u1: float, v1: float) -> None
 blit_vspan(source: image, x: int, y: int, c: int, u0: float, v0: float, u1: float, v1: float) -> None
 blur(radius: int) -> None
-image.circle(point: vec2, radius: int) -> None
-image.circle(x: int|float, y: int|float, radius: int) -> None
+circle(point: vec2, radius: int) -> None
+circle(x: int|float, y: int|float, radius: int) -> None
 clear() -> None
 dither() -> None
 get(x: int, y: int) -> color
@@ -585,7 +585,7 @@ shape(s: shape) -> None
 text(message: string, p: vec2) -> None
 text(message: string, x: int|float, y: int|float) -> None
 triangle(p0: vec2, p1: vec2, p2: vec2) -> None
-triangle(x0, y0, x1, y1, x2, y2) -> None
+triangle(: int|float, y0: int|float, x1: int|float, y1: int|float, x2: int|float, y2: int|float) -> None
 window(r: rect) -> image
 window(x: int|float, y: int|float, w: int|float, h: int|float) -> image
 ```

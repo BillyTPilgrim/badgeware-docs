@@ -10,12 +10,12 @@ This class provides functions for loading pixel fonts, which can then be used to
 
 Text is drawn using the currently selected brush, allowing for alpha blending and other visual effects.
 
-Badgeware includes thirty high-quality, licensed pixel fonts created by [somepx](https://somepx.itch.io), giving you plenty of options to add style and character to your applications.
+Badgeware includes over thirty high-quality, licensed pixel fonts created by [somepx](https://somepx.itch.io), giving you plenty of options to add style and character to your applications.
 
 # Properties
 
 ## height
-The height, in pixels, of the fonts glyph bounding box.
+The height, in pixels, of the font's glyph bounding box.
 
 ## name
 The name of the pixel font.
@@ -25,8 +25,6 @@ The name of the pixel font.
 Text wouldn’t be nearly as engaging without a great selection of fonts. When we came across [Ivano's](https://somepx.itch.io) extensive collection of pixel fonts, we knew they were a perfect match for Badgeware.
 
 Included are a wide range of styles covering everything from clean, readable text to bold display typefaces inspired by classic arcade and sci-fi aesthetics.
-
-In addition to licensing thirty of Ivano’s existing fonts for you to use, we also commissioned a custom Badgeware font in two sizes. With its bold cyberpunk aesthetic, it’s an ideal choice for retro-futuristic user interfaces.
 
 Our pixel font file format is called Pixel Perfect Font (`.ppf`) and all of the fonts are pre-loaded onto your badge and accessible via `rom_font`.
 

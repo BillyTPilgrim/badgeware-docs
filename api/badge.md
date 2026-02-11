@@ -207,26 +207,26 @@ Returns True if the badge was woken by being reset, False otherwise.
 
 ## Constants
 ```python-raw
-BUTTON_A: XXXXX
-BUTTON_B: XXXXX
-BUTTON_C: XXXXX
-BUTTON_UP: XXXXX
-BUTTON_DOWN: XXXXX
-BUTTON_HOME: XXXXX
-LORES: XXXXX
-HIRES: XXXXX
-VSYNC: XXXXX
-FAST_UPDATE: XXXXX
-FULL_UPDATE: XXXXX
-MEDIUM_UPDATE: XXXXX
-DITHER: XXXXX
+BUTTON_A: input
+BUTTON_B: input
+BUTTON_C: input
+BUTTON_UP: input
+BUTTON_DOWN: input
+BUTTON_HOME: input
+LORES: binary
+HIRES: binary
+VSYNC: binary
+FAST_UPDATE: binary
+FULL_UPDATE: binary
+MEDIUM_UPDATE: binary
+DITHER: binary
 ```
 
 ## Properties
 ```python-raw
 ticks: int
 ticks_delta: int
-uid: XXXXX
+uid: hex
 ```
 
 ## Methods
@@ -234,7 +234,7 @@ uid: XXXXX
 battery_level() -> int
 battery_voltage() -> float
 badge.changed() -> tuple
-badge.changed(button: XXXXX) -> bool
+badge.changed(button: input) -> bool
 default_clear() -> color | None
 default_clear(color: color | None) -> None
 default_pen() -> color
@@ -242,15 +242,15 @@ default_pen(color: color) -> None
 disk_free(mountpoint: string="/") -> int
 get_caselights() -> tuple
 held() -> tuple
-held(button: XXXXX) -> bool
+held(button: input) -> bool
 is_charging() -> bool
 light_level() -> int
-mode(modes: XXXXX) -> None
+mode(modes: binary) -> None
 poll() -> None
 pressed() -> tuple
-pressed(button: XXXXX) -> bool
+pressed(button: input) -> bool
 released() -> tuple
-released(button: XXXXX) -> bool
+released(button: input) -> bool
 resolution() -> tuple
 set_caselights(level1: int[, level2: int, level3: int, level4: int]) -> None
 sleep(duration: int=None) -> None

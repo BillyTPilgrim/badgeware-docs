@@ -36,7 +36,7 @@ def update():
 ## tokenise()
 This method breaks down a string into its component parts, allowing the `draw()` method to draw it to the screen. If you pass a raw string straight into `draw()`, it'll actually use `tokenise()` behind the scenes before rendering the text.
 
-`tokenise()` returns 
+`tokenise()` returns a list of tokens.
 
 ### Usage
 - `text.tokenise(image, text, glyph_renderers, size)`
@@ -138,33 +138,41 @@ Here you can see that this draws a 12px x 12px square in the current pen colour.
 We've included a scrolling function to make this common activity quicker and easier.
 
 ## scroll()
-This generates a closure, a function which you can call every `update()` to scroll the specified text from right to left. 
+This generates a closure, a function which you can call every `update()` to scroll the specified text from right to left. This closure will draw the scrolling text to a target image, and advance the scroll, as well as returning a float which denotes how far through the scroll cycle it is.
+
+The text will always be drawn scrolling between both edges of the target image, so if you want to position the scrolling text within a larger image, you'll want to use `image.window()` to make a window onto that image in the appropriate place, and use that as your target image.
 
 ### Usage
-- `.scroll(text, font_face=None, bg=None, fg=None, target=None, speed, continuous=False, font_size=None)`
+- `.scroll(text, font_face, font_size, target, speed, gap, align)`
     - `text` - The text to scroll.
-    - `font_face` (Optional) - The font to use for the scrolling text. Default is None.
-    - `bg` (Optional) - default None
-    - `fg` (Optional) - default None
-    - `target` (Optional) - default None
-    - `speed` (Optional) - The speed at which to scroll the text. Default is 25.
-    - `continuous` (Optional) - default False
-    - `font_size` (Optional) - default None
+    - `font_face` (Optional) - The font to use for the scrolling text. Default is `rom_font.sins`.
+    - `font_size` (Optional) - The font size if you are using a vector font. Default is `None`.
+    - `target` (Optional) - the image the scrolling text should be drawn to. Default is `screen`.
+    - `speed` (Optional) - The speed at which to scroll the text, in pixels per second. Default is `25`.
+    - `gap` (Optional) - The space between each repetition of the scrolling text, in pixels. `None` means the next repetition will appear as the previous one leaves the image. Default is `None`.
+    - `align` (Optional) - The vertical alignment of the text on the target. Options are `top`, `middle`, `bottom` or a y-coordinate. Default is `middle`.
 
 ### Example
 ```python
-# Makes an image which we can draw to,
-# then we'll draw this image to the screen every frame
-text_window - image(80, 20)
 
-text = "Hello world! once again, this is a long piece of text which is supposed to scroll outside its area! Whoop whoop!"
+text = "Hello world! Once again, this is a long piece of text which is supposed to scroll outside its area! Whoop whoop!"
 
-# Now we set up the scrolling text itself
-my_scroll = text.scroll(text, font_face=rom_font.sins, target=text_window)
+# Now we set up the scrolling text itself, very simple.
+my_scroll = text.scroll(text)
+
+# This window is 10px within the screen boundaries.
+text_window = screen.window(10, 10, screen.width - 20, screen.height - 20)
+
+# This scroll is set up with a few more parameters.
+my_other_scroll = text.scroll(text, font_face=rom_font.ark, target=text_window, gap=20, align="bottom")
 
 update():
-    # We're writing it to the screen...
-    screen.blit(scroll_window, vec2(0, 0))
-    # ...then advancing it by calling the closure we made.
+    # We call the closures we made every frame.
     my_scroll()
+    # For this one we're taking the return value
+    # to see how far along the scroll it is.
+    progress = my_other_scroll()
+
+    # And then we'll show that number.
+    screen.text(my_scroll, 10, 10)
 ```
