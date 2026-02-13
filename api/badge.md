@@ -19,6 +19,18 @@ The number of ticks (milliseconds) since the previous time `update()` was called
 ## uid
 Provides a unique ID for the badge.
 
+## default_clear()
+This represents the colour the display will be cleared to before each `update()` loop. You can set this to `None` to disable clearing the screen between updates.
+
+## default_pen()
+The default colour that `screen.pen` will be set to at the start of every `update()`. Note that this will not accept `None`, only a colour.
+
+## resolution
+The display resolution of the badge as a tuple containing pixel width and height as ints.
+
+## update
+Allows you to set and switch between custom methods for the badge to replace `update()`. This allows you to, for example, easily flip between multiple screens, using a different method to draw each one.
+
 # Buttons
 There are two main ways to handle button input.
 - For things like menu navigation, you usually want to respond only when a button is first pressed.
@@ -133,29 +145,6 @@ Returns a boolean reflecting whether the USB cable is currently connected.
 Returns a boolean reflecting whether the battery is currently charging.
 
 # Graphics
-Some aspects of the badge are set using this class, particularly those parts which apply across the badge rather than on individual `image`s.
-
-## default_clear()
-When called without a parameter, this returns the colour the display will be cleared to before each `update()` loop. If you pass it a colour, it will set the display clear colour to this, or disable clearing the screen between updates if you pass in `None`.
-
-### Usage
-- `.default_clear()`
-- `.default_clear(color)`
-    - `color` - A `color` object specifying the clear colour, or `None` to disable screen clearing.
-
-### Returns
-A `color` or `None` if used without parameters, `None` otherwise.
-
-## default_pen()
-This is just as `default_clear()`, except that it reads or sets the default colour that `screen.pen` will be set to at the start of every `update()`. Note that this will not accept `None`, only a colour.
-
-### Usage
-- `.default_pen()`
-- `.default_pen(color)`
-    - `color` - A `color` object specifying the pen colour.
-
-### Returns
-A `color` if used without parameters, `None` otherwise.
 
 ## mode()
 Changes the display mode of the badge. You can apply more than one mode at once, where applicable, by using the pipe symbol, e.g. `badge.mode(HIRES | VSYNC)`.
@@ -172,9 +161,6 @@ Changes the display mode of the badge. You can apply more than one mode at once,
 
 ### Returns
 `None`
-
-## resolution()
-Returns the display resolution of the badge as a tuple containing pixel width and height as ints.
 
 # Memory
 These methods monitor the badge's flash space and RAM, so you can check how full your Badge is with software and assets.
@@ -197,20 +183,18 @@ Prints to console the amount of free RAM, prepended with the message if specifie
 # Lighting
 Badgeware is fitted with four onboard white LEDs on the back of the board. These can be used as indicators, decoration or anything else you can think of. Tufty also has a front-mounted light sensor which 
 
-## set_caselights()
-Sets the brightness value for the rear lighting on the badge.
+## caselights()
+Gets and sets the brightness value for the rear lighting on the badge.
 
 ### Usage
-- `.set_caselights(level)`
+- `.caselights()` - Returns the current level of the rear LEDs as a tuple.
+- `.caselights(level)`
         - `level` - Brightness to set on all rear LEDs (0-255)
-- `.set_caselights(level1, level2, level3, level4)`
+- `.caselights(level1, level2, level3, level4)`
         - `level1`, `level2`, `level3`, `level4` - Brightness to set for each rear LED individually (0-255)
 
 ### Returns
-`None`
-
-## get_caselights()
-Returns a tuple containing the current value of all rear LEDs as floats.
+`None`, or a tuple if no parameter specified.
 
 ## light_level() [TUFTY ONLY]
 Returns the level detected by the light sensor as a raw u16 value.
@@ -254,37 +238,35 @@ DITHER: binary
 
 ## Properties
 ```python-raw
-ticks: int
-ticks_delta: int
-uid: hex
+badge.default_clear: color | None
+badge.default_pen: color
+badge.resolution: tuple
+badge.ticks: int
+badge.ticks_delta: int
+badge.uid: hex
+badge.update: function
 ```
 
 ## Methods
 ```python-raw
-battery_level() -> int
-battery_voltage() -> float
+badge.battery_level() -> int
+badge.battery_voltage() -> float
 badge.changed() -> tuple
 badge.changed(button: input) -> bool
-default_clear() -> color | None
-default_clear(color: color | None) -> None
-default_pen() -> color
-default_pen(color: color) -> None
-disk_free(mountpoint: string="/") -> int
-get_caselights() -> tuple
-held() -> tuple
-held(button: input) -> bool
-is_charging() -> bool
-light_level() -> int
-mode(modes: binary) -> None
-poll() -> None
-pressed() -> tuple
-pressed(button: input) -> bool
-released() -> tuple
-released(button: input) -> bool
-resolution() -> tuple
-set_caselights(level1: int[, level2: int, level3: int, level4: int]) -> None
-sleep(duration: int=None) -> None
-usb_connected() -> bool
-woken_by_button() -> bool
-woken_by_reset() -> bool
+badge.caselights([light1: int, light2: int, light3: int, light4: int]) -> None | tuple
+badge.disk_free(mountpoint: string="/") -> int
+badge.held() -> tuple
+badge.held(button: input) -> bool
+badge.is_charging() -> bool
+badge.light_level() -> int
+badge.mode(modes: binary) -> None
+badge.poll() -> None
+badge.pressed() -> tuple
+badge.pressed(button: input) -> bool
+badge.released() -> tuple
+badge.released(button: input) -> bool
+badge.sleep(duration: int=None) -> None
+badge.usb_connected() -> bool
+badge.woken_by_button() -> bool
+badge.woken_by_reset() -> bool
 ```

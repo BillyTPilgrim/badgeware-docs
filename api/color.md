@@ -27,6 +27,9 @@ Creates a new `color` object from red, green, blue, and optional alpha values.
     - `r, g, b`: Colour component values from 0 to 255
     - `a`: Optional alpha value from 0 to 255
 
+### Returns
+`color`
+
 ### Example
 ```python
 def update():
@@ -48,6 +51,9 @@ HSV is not perceptually uniform, so equal changes in its values do not correspon
     - `s`: Saturation from 0 to 255
     - `v`: Value (brightness) from 0 to 255
     - `a`: Optional alpha value from 0 to 255
+
+### Returns
+`color`
 
 ### Example
 ```python
@@ -72,6 +78,9 @@ OKLCH is a perceptually uniform colour space, meaning equal changes in its value
     - `c`: Chroma (saturation) from 0 to 255
     - `h`: Hue from 0 to 255
     - `a`: Optional alpha value from 0 to 255
+
+### Returns
+`color`
 
 ### Example
 ```python

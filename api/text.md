@@ -22,6 +22,9 @@ This method will write text into a specified area, wrapping onto new lines if it
     - `word_spacing` (Optional) - The spacing between words. Defaults to 1.
     - `size` (Optional) - The height to render the text when using a vector font. Defaults to 24px.
 
+### Returns
+`None`.
+
 ### Example
 ```python
 screen.font = rom_font.sins
@@ -45,6 +48,9 @@ This method breaks down a string into its component parts, allowing the `draw()`
     - `glyph_renderers` (Optional) - a dictionary of glyph renderers (see below) to be applied to the text.
     - `size` (Optional) - the text size to render, if you're using a vector font.
 
+### Returns
+A `list` containing the individual text tokens.
+
 ### Example
 ```python
 screen.font = rom_font.sins
@@ -53,7 +59,7 @@ screen.pen = color.rgb(0, 0, 255)
 def update():
     bounds = rect(10, 10, 140, 110)
     message = "Well hello there, world!"
-    tokens = text_tokenise(screen, message)
+    tokens = text.tokenise(screen, message)
     text.draw(screen, tokens, bounds)
 ```
 
@@ -100,7 +106,7 @@ def update():
     screen.pen = color.rgb(0, 0, 255)
     bounds = rect(10, 10, 140, 110)
     message = "I'm written in blue... [pen:255,0,0]or am I?"
-    tokens = text_tokenise(screen, message, glyph_renderers)
+    tokens = text.tokenise(screen, message, glyph_renderers)
     text.draw(screen, tokens, bounds)
 ```
 So, `pen_glyph_renderer()` is called by placing `[pen:r, g, b]` in the middle of the text, as its key in the `glyph_renderers` dictionary is `pen`.
@@ -129,7 +135,7 @@ glyph_renderers = {
 def update():
     bounds = rect(10, 10, 140, 110)
     message = "Come on, man, don't be a [square] all your life..."
-    tokens = text_tokenise(screen, message, glyph_renderers)
+    tokens = text.tokenise(screen, message, glyph_renderers)
     text.draw(screen, tokens, bounds)
 ```
 Here you can see that this draws a 12px x 12px square in the current pen colour. This time round, `parameters` isn't used. `cursor` gives us the position we're 'at' in the text - we're using that as the coordinates of the top left of the square. If `measure` is true, we should return the width of what we're drawing, which in this case is 12.
@@ -143,7 +149,7 @@ This generates a closure, a function which you can call every `update()` to scro
 The text will always be drawn scrolling between both edges of the target image, so if you want to position the scrolling text within a larger image, you'll want to use `image.window()` to make a window onto that image in the appropriate place, and use that as your target image.
 
 ### Usage
-- `.scroll(text, font_face, font_size, target, speed, gap, align)`
+- `text.scroll(text, font_face, font_size, target, speed, gap, align)`
     - `text` - The text to scroll.
     - `font_face` (Optional) - The font to use for the scrolling text. Default is `rom_font.sins`.
     - `font_size` (Optional) - The font size if you are using a vector font. Default is `None`.
@@ -151,6 +157,9 @@ The text will always be drawn scrolling between both edges of the target image, 
     - `speed` (Optional) - The speed at which to scroll the text, in pixels per second. Default is `25`.
     - `gap` (Optional) - The space between each repetition of the scrolling text, in pixels. `None` means the next repetition will appear as the previous one leaves the image. Default is `None`.
     - `align` (Optional) - The vertical alignment of the text on the target. Options are `top`, `middle`, `bottom` or a y-coordinate. Default is `middle`.
+
+### Returns
+`None`.
 
 ### Example
 ```python

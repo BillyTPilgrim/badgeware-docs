@@ -8,7 +8,7 @@ publish: true
 # Introduction
 Unlike pixel-based graphics, vector shapes are described using geometry rather than fixed pixels. This allows them to be scaled, transformed, and positioned with much greater precision.
 
-Shapes are defined by paths — a collection of points that make up the outline. Even with this simple representation, vector shapes are extremely useful for drawing clean UI elements, icons, and geometric artwork.
+Shapes are defined by paths — a collection of points that make up the outline. Even with this simple representation, vector shapes are extremely useful for drawing clean UI elements, icons, and geometric artwork. All of the methods below all create the same type, the `shape` type, but they create different sets of points to go within it.
 
 Because shapes are resolution-independent, they can be drawn at different sizes without becoming blocky or distorted. When combined with antialiasing, they allow you to create crisp, smooth graphics that would be difficult to achieve with bitmap drawing alone.
 
@@ -19,12 +19,15 @@ The following static methods all return new `shape` objects.
 Creates a new `shape` representing a circle.
 
 ### Usage
-- `circle(centre, radius)`
+- `shape_name = shape.circle(centre, radius)`
     - `centre`: Position of the centre point (`vec2`)
     - `radius`: Radius of the circle in pixels
-- `circle(x, y, radius)`
+- `shape_name = shape.circle(x, y, radius)`
     - `x, y`: Position of the centre point
     - `radius`: Radius of the circle in pixels
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -38,9 +41,12 @@ def update():
 Creates a new `shape` representing a rectangle.
 
 ### Usage
-- `rectangle(x, y, width, height)`
+- `shape_name = shape.rectangle(x, y, width, height)`
     - `x, y`: Coordinates of the top-left corner
     - `width, height`: Width and height of the rectangle
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -54,10 +60,13 @@ def update():
 Creates a new shape representing a regular polygon — a closed shape with evenly spaced sides and equal angles (for example: triangles, squares, pentagons, and so on).
 
 ### Usage
-- `regular_polygon(x, y, radius, sides)`
+- `shape_name = shape.regular_polygon(x, y, radius, sides)`
     - `x, y`: Position of the centre point
     - `radius`: Radius of the polygon (distance from the centre to each corner)
     - `sides`: Number of sides (must be 3 or greater)
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -78,14 +87,17 @@ Rounded rectangles are especially useful for modern UI elements such as buttons,
 You can specify either a single corner radius for all corners, or provide individual radii to create asymmetric shapes.
 
 ### Usage
-- `rounded_rectangle(x, y, width, height, radius)`
+- `shape_name = shape.rounded_rectangle(x, y, width, height, radius)`
     - `x, y`: Coordinates of the top-left corner
     - `width, height`: Width and height
     - `radius`: Corner radius applied to all corners
-- `rounded_rectangle(x, y, width, height, r1, r2, r3, r4)`
+- `shape_name = shape.rounded_rectangle(x, y, width, height, r1, r2, r3, r4)`
     - `x, y`: Coordinates of the top-left corner
     - `width, height`: Width and height
     - `r1, r2, r3, r4`: Corner radii (top-left, top-right, bottom-right, bottom-left)
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -107,10 +119,13 @@ Squircles are useful for UI elements like icons and buttons, producing corners t
 The optional squareness factor controls the shape: lower values are more circular, higher values more square-like.
 
 ### Usage
-- `squircle(x, y, s[, n])`
+- `shape_name = shape.squircle(x, y, s[, n])`
     - `x, y`: Position of the centre point
     - `s`: Size of the squircle
     - `n`: Optional squareness factor (default 4)
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -126,12 +141,15 @@ Arcs are useful for gauges, progress indicators, rings, and other circular UI el
 Angles are measured in degrees, where 0° points straight up, and values increase clockwise.
 
 ### Usage
-- `arc(x, y, inner, outer, from, to)`
+- `shape_name = shape.arc(x, y, inner, outer, from, to)`
     - `x, y`: Position of the centre point
     - `inner`: Inner radius
     - `outer`: Outer radius
     - `from`: Start angle (degrees)
     - `to`: End angle (degrees)
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -148,11 +166,14 @@ The slice is defined by an inner and outer radius.
 Angles are measured in degrees, where 0° points straight up, and values increase clockwise.
 
 ### Usage
-- `pie(x, y, r, f, t)`
+- `shape_name = shape.pie(x, y, r, f, t)`
     - `x, y`: Position of the centre point
     - `r`: Radius of the pie slice
     - `f`: Start angle
     - `t`: End angle
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -167,11 +188,14 @@ def update():
 Creates a new shape representing a star.
 
 ### Usage
-- `star(x, y, s, ro, ri)`
+- `shape_name = shape.star(x, y, s, ro, ri)`
     - `x, y`: Position of the centre point
     - `s`: Number of points
     - `ro`: Outer radius (tip distance from centre)
     - `ri`: Inner radius (indent distance from centre)
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -185,10 +209,13 @@ def update():
 Creates a new `shape` representing a line segment.
 
 ### Usage
-- `line(x1, y1, x2, y2, w)`
+- `shape_name = shape.line(x1, y1, x2, y2, w)`
     - `x1, y1`: Start position
     - `x2, y2`: End position
     - `w`: Line width
+
+### Returns
+A `shape` representing the created shape.
 
 ### Example
 ```python
@@ -219,32 +246,35 @@ The supplied thickness controls where the outline is placed:
 This makes it possible to create both outer borders and inset outlines depending on the effect you want.
 
 ### Usage
-- `.stroke(thickness)`
+- `shape_name.stroke(thickness)`
     - `thickness`: Thickness of the stroke in pixels
+
+### Returns
+A `shape` representing the stroke of the previous shape.
 
 # Reference
 
 ## Constructors
 ```python-raw
-arc(x: int|float, y: int|float, inner: int|float, outer: int|float, from: int|float, to: int|float) -> shape
-circle(centre: vec2, radius: int|float) -> shape
-circle(x: int|float, y: int|float, radius: int|float) -> shape
-line(x1: int|float, y1: int|float, x2: int|float, y2: int|float, w: int|float) -> shape
-pie(x: int|float, y: int|float, r: int|float, f: int|float, t: int|float) -> shape
-rectangle(x: int|float, y: int|float, width: int|float, height: int|float) -> shape
-regular_polygon(x: int|float, y: int|float, radius: int|float, sides: int) -> shape
-rounded_rectangle(x: int|float, y: int|float, width: int|float, height: int|float, radius: int|float) -> shape
-rounded_rectangle(x: int|float, y: int|float, width: int|float, height: int|float, r1: int|float, r2: int|float, r3: int|float, r4: int|float) -> shape
-squircle(x: int|float, y: int|float, s: int|float, n: int|float=4) -> shape
-star(x: int|float, y: int|float, s: int, ro: int|float, ri: int|float) -> shape
+shape.arc(x: int|float, y: int|float, inner: int|float, outer: int|float, from: int|float, to: int|float) -> shape
+shape.circle(centre: vec2, radius: int|float) -> shape
+shape.circle(x: int|float, y: int|float, radius: int|float) -> shape
+shape.line(x1: int|float, y1: int|float, x2: int|float, y2: int|float, w: int|float) -> shape
+shape.pie(x: int|float, y: int|float, r: int|float, f: int|float, t: int|float) -> shape
+shape.rectangle(x: int|float, y: int|float, width: int|float, height: int|float) -> shape
+shape.regular_polygon(x: int|float, y: int|float, radius: int|float, sides: int) -> shape
+shape.rounded_rectangle(x: int|float, y: int|float, width: int|float, height: int|float, radius: int|float) -> shape
+shape.rounded_rectangle(x: int|float, y: int|float, width: int|float, height: int|float, r1: int|float, r2: int|float, r3: int|float, r4: int|float) -> shape
+shape.squircle(x: int|float, y: int|float, s: int|float, n: int|float=4) -> shape
+shape.star(x: int|float, y: int|float, s: int, ro: int|float, ri: int|float) -> shape
 ```
 
 ## Properties
 ```python-raw
-transform -> mat3
+shape.transform -> mat3
 ```
 
 ## Methods
 ```python-raw
-stroke(thickness: int) -> shape
+shape.stroke(thickness: int) -> shape
 ```

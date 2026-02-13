@@ -15,8 +15,11 @@ A global image instance called `screen` represents the device framebuffer. All r
 Returns an `image` with the specified width and height.
 
 ### Usage
-- `image(w, h)`
+- `image_name = image(w, h)`
     - `w, h`: Width and height of the image to create.
+
+### Returns
+`image`
 
 # Properties
 
@@ -117,7 +120,7 @@ def update():
 # Drawing
 The drawing API provides a collection of fast, low-level primitives for rendering simple shapes directly into an image’s pixel buffer. These methods are designed for speed and simplicity, making them suitable for real-time graphics, UI elements, and procedural drawing. These methods round position and dimension values to the nearest pixel for speed.
 
-You can also render vector shapes using the `shape` method. Vector shapes support sub-pixel positioning. Vector drawing supports antialiasing, controlled by the current antialiasing setting, and uses the currently selected brush for stroke and fill operations unless otherwise stated.
+You can also render vector shapes using the `shape()` method. Vector shapes support sub-pixel positioning. Vector drawing supports antialiasing, controlled by the current antialiasing setting, and uses the currently selected brush for stroke and fill operations unless otherwise stated.
 
 All drawing operations use the currently selected brush/colour unless otherwise stated.
 
@@ -138,15 +141,21 @@ def update():
 Returns the `color` of a single pixel.
 
 ### Usage
-- `get(x, y)`
+- `image_name.get(x, y)`
     - `x, y` — Pixel coordinate
+
+### Returns
+A `color` representing the pixel.
 
 ## put()
 Draws a single pixel using the current brush.
 
 ### Usage
-- `put(x, y)`
+- `image_name.put(x, y)`
     - `x, y` — Pixel coordinate
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -169,11 +178,14 @@ def update():
 Draws a filled rectangle using the current brush.
 
 ### Usage
-- `rectangle(x, y, w, h)`
+- `image_name.rectangle(x, y, w, h)`
     - `x, y` — Coordinates of the top-left corner
     - `w, h` — Width and height
-- `rectangle(rect)`
+- `image_name.rectangle(rect)`
     - `rect` - A `rect` object
+
+### Returns
+`None`
 
 ### Example
 
@@ -193,12 +205,15 @@ def update():
 Draws a filled circle using the current brush.
 
 ### Usage
-- `circle(point, radius)`
+- `image_name.circle(point, radius)`
   - `point` — A `vec2` object containing the centre point
   - `radius` - Radius in pixels
-- `circle(x, y, radius)`
+- `image_name.circle(x, y, radius)`
   - `x, y` — Coordinates of the centre point
   - `radius` - Radius in pixels
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -219,11 +234,14 @@ Draws a straight line between two points.
 `line` can be called in two ways: by passing a start and end `vec2` or by specifying the positions as individual values.
 
 ### Usage
-- `line(start, end)`
+- `image_name.line(start, end)`
     - `start, end` — Start and end points (`vec2`) of the line
-- `line(x0, y0, x1, y1)`
+- `image_name.line(x0, y0, x1, y1)`
     - `x0, y0` — Start point of the line
     - `x1, y1` — End point of the line
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -245,12 +263,15 @@ Draws a filled triangle defined by three vertices.
 `triangle` can be called in two ways: by passing three `vec2` values or by specifying the positions as individual values.
 
 ### Usage
-- `triangle(p0, p1, p2)`
+- `image_name.triangle(p0, p1, p2)`
     - `p0, p1, p2` — Coordinates of the triangle vertices
-- `triangle(x0, y0, x1, y1, x2, y2)`
+- `image_name.triangle(x0, y0, x1, y1, x2, y2)`
     - `x0, y0` — First vertex of the triangle
     - `x1, y1` — Second vertex of the triangle
     - `x2, y2` — Third vertex of the triangle
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -273,8 +294,11 @@ Draws a vector shape (see `shape`) to the image using the current brush and anti
 Vector shapes are created using one of the predefined helper methods on the shape type, or by constructing your own custom shapes manually. Unlike the raster drawing above, vector shapes can be dimensioned and positioned with subpixel accuracy at a slight speed cost.
 
 ### Usage
-- `shape(s)`
+- `image_name.shape(s)`
     - `s`: The shape to draw
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -302,17 +326,20 @@ Text is positioned relative to the top-left corner of its bounding box, and all 
 ## text()
 Writes text to the image using the current font and brush at the specified position.
 
-The `text` method can be called in two forms: by passing a `vec2` that defines the position, or by specifying the position as individual `x` and `y` values.
+The `text()` method can be called in two forms: by passing a `vec2` that defines the position, or by specifying the position as individual `x` and `y` values.
 
 ### Usage
-- `text(message, p, size)`
+- `image_name.text(message, p, size)`
     - `message`: The text to write
     - `p`: Position of the top-left corner of the text as a `vec2`
     - `size` (Optional) - the size of the text for vector fonts. Using this parameter with pixel fonts will cause an error.
-- `text(message, x, y, size)`
+- `image_name.text(message, x, y, size)`
     - `message`: The text to write
     - `x, y`: Position of the top-left corner of the text
     - `size` (Optional) - the size of the text for vector fonts. Using this parameter with pixel fonts will cause an error.
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -327,8 +354,12 @@ def update():
 Returns a tuple containing the width and height of the given text, when rendered using the current font.
 
 ### Usage
-- `measure_text(message)`
+- `image_name.measure_text(message, size)`
     - `message`: The text to measure
+    - `size` (Optional): The font size, if the current font is a vector font.
+
+### Returns
+A `tuple` containing x and y dimensions in pixels
 
 ### Example
 ```python
@@ -350,8 +381,11 @@ Filters are applied to an entire image's clipping area.
 Blurs the contents of the image.
 
 ### Usage
-- `blur(radius)`
+- `image_name.blur(radius)`
     - `radius`: The radius of the blur filter (higher = stronger)
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -413,8 +447,11 @@ Load image data from files or byte streams into image objects.
 Loads an image from the specified file path and returns it as a new `image` object.
 
 ### Usage
-- `load(path)`
+- `image_name = image.load(path)`
     - `path`: Path to the image file to load
+
+### Returns
+An `image` object the dimensions of the file.
 
 ### Example
 ```python
@@ -437,21 +474,24 @@ Depending on the parameters provided, `blit` can:
 - or crop from a source rectangle and scale into a destination rectangle
 
 ### Usage
-- `blit(source, x, y)`
+- `image_name.blit(source, x, y)`
     - `source`: The source `image` to blit
     - `x, y`: Coordinates of the top-left corner of the destination
-- `blit(source, p)`
+- `image_name.blit(source, p)`
     - `source`: The source `image` to blit
     - `p`: `vec2` containing the coordinates of the top-left corner of the destination
-- `blit(source, rect)`
+- `image_name.blit(source, rect)`
     - `source`: The source `image` to blit
     - `rect`: Destination rectangle to blit into - the source image is scaled to fit rect
-- `blit(source, source_rect, dest_rect)`
+- `image_name.blit(source, source_rect, dest_rect)`
     - `source`: The source `image` to blit
     - `source_rect`: Source rectangle to blit from (crop region)
     - `dest_rect`: Destination rectangle to blit into - if dest_rect is a different size to source_rect, the blit is scaled
 
 > Note: If the width and height of the destination rectangle are negative then the blit will flip vertically and/or horizontally!
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -474,7 +514,7 @@ Blit (copy) a vertical span from source into this image. This is a low-level hel
 The span is sampled from the source image using UV texture coordinates.
 
 ### Usage
-- `blit_vspan(source, x, y, c, u0, v0, u1, v1)`
+- `image_name.blit_vspan(source, x, y, c, u0, v0, u1, v1)`
     - `source`: The source `image` to blit
     - `x, y`: Coordinates of the top-left corner of the destination
     - `c`: The length of the span (number of pixels) to draw
@@ -490,6 +530,9 @@ For example:
 - v = 1.0 is the bottom edge
 
 UV coordinates may fall outside the 0..1 range. If they do, the source texture will wrap around automatically, making this useful for tiled textures or repeating patterns.
+
+### Returns
+`None`
 
 ### Example
 ```python
@@ -511,9 +554,9 @@ def update():
 ```
 
 ## blit_hspan()
-Functionally identical to `blit_vspan`, but renders a horizontal span of pixels instead of a vertical one.
+Functionally identical to `blit_vspan()`, but renders a horizontal span of pixels instead of a vertical one.
 
-See `blit_vspan` above for full parameter and coordinate details.
+See `blit_vspan()` above for full parameter and coordinate details.
 
 # Other
 
@@ -523,11 +566,14 @@ Returns an `image` which is a view onto a rectangular subsection of the image.
 The returned image shares its underlying data with the original image. All drawing operations performed on the window are clipped to the specified area, and the window’s origin `(0, 0)` is relative to its top-left corner, not the original image.
 
 ### Usage
-- `window(r)`
+- `window_name = image_name.window(r)`
     - `r` — A `rect` defining the position and size of the window
-- `window(x, y, w, h)`
+- `window_name = image.window(x, y, w, h)`
     - `x, y` — Coordinates of the top-left corner
     - `w, h` — Width and height of the window
+
+### Returns
+An `image` object representing the contents of the window.
 
 ## raw
 A bytearray that references the start of the image’s backing buffer (advanced/unsafe). Don’t write past the end! (for experts only!)
@@ -559,33 +605,33 @@ width: int
 
 ## Methods
 ```python-raw
-blit(source: image, x: int, y: int) -> None
-blit(source: image, p: vec2) -> None
-blit(source: image, rect: rect) -> None
-blit(source: image, source_rect: rect, dest_rect: rect) -> None
-blit_hspan(source: image, x: int, y: int, c: int, u0: float, v0: float, u1: float, v1: float) -> None
-blit_vspan(source: image, x: int, y: int, c: int, u0: float, v0: float, u1: float, v1: float) -> None
-blur(radius: int) -> None
-circle(point: vec2, radius: int) -> None
-circle(x: int|float, y: int|float, radius: int) -> None
-clear() -> None
-dither() -> None
-get(x: int, y: int) -> color
-line(start: vec2, end: vec2) -> None
-line(x0: int|float, y0: int|float, x1: int|float, y1: int|float) -> None
-load(path: string) -> None
-measure_text(message: string) -> tuple
-monochrome() -> None
-onebit() -> None
-put(x: int, y: int) -> None
-raw() -> bytearray
-rectangle(x: int|float, y: int|float, w: int|float, h: int|float) -> None
-rectangle(rect: rect) -> None
-shape(s: shape) -> None
-text(message: string, p: vec2) -> None
-text(message: string, x: int|float, y: int|float) -> None
-triangle(p0: vec2, p1: vec2, p2: vec2) -> None
-triangle(: int|float, y0: int|float, x1: int|float, y1: int|float, x2: int|float, y2: int|float) -> None
-window(r: rect) -> image
-window(x: int|float, y: int|float, w: int|float, h: int|float) -> image
+image.blit(source: image, x: int, y: int) -> None
+image.blit(source: image, p: vec2) -> None
+image.blit(source: image, rect: rect) -> None
+image.blit(source: image, source_rect: rect, dest_rect: rect) -> None
+image.blit_hspan(source: image, x: int, y: int, c: int, u0: float, v0: float, u1: float, v1: float) -> None
+image.blit_vspan(source: image, x: int, y: int, c: int, u0: float, v0: float, u1: float, v1: float) -> None
+image.blur(radius: int) -> None
+image.circle(point: vec2, radius: int) -> None
+image.circle(x: int|float, y: int|float, radius: int) -> None
+image.clear() -> None
+image.dither() -> None
+image.get(x: int, y: int) -> color
+image.line(start: vec2, end: vec2) -> None
+image.line(x0: int|float, y0: int|float, x1: int|float, y1: int|float) -> None
+image.load(path: string) -> None
+image.measure_text(message: string) -> tuple
+image.monochrome() -> None
+image.onebit() -> None
+image.put(x: int, y: int) -> None
+image.raw() -> bytearray
+image.rectangle(x: int|float, y: int|float, w: int|float, h: int|float) -> None
+image.rectangle(rect: rect) -> None
+image.shape(s: shape) -> None
+image.text(message: string, p: vec2) -> None
+image.text(message: string, x: int|float, y: int|float) -> None
+image.triangle(p0: vec2, p1: vec2, p2: vec2) -> None
+image.triangle(: int|float, y0: int|float, x1: int|float, y1: int|float, x2: int|float, y2: int|float) -> None
+image.window(r: rect) -> image
+image.window(x: int|float, y: int|float, w: int|float, h: int|float) -> image
 ```

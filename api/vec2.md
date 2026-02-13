@@ -13,8 +13,11 @@ Although x and y are stored as floating-point values, they represent pixel coord
 
 ## vec2()
 ### Usage
-- `vec2(x, y)`
+- `point_name = vec2(x, y)`
         - `x, y` - The pixel coordinates.
+
+### Returns
+A `vec2` containing the specified coordinates.
 
 # Properties
 
@@ -30,7 +33,7 @@ The y coordinate measured in pixels.
 Returns a new `vec2` with the specified matrix transformation applied.
 
 ### Usage
-- `.transform(m)`
+- `point_name.transform(m)`
     - `m`: A transformation matrix
 
 # Reference
@@ -42,11 +45,11 @@ vec2(x: int|float, y: int|float) -> vec2
 
 ## Properties
 ```python-raw
-x -> float
-y -> float
+vec2.x -> float
+vec2.y -> float
 ```
 
 ## Methods
 ```python-raw
-transform(m: mat3) -> vec2
+vec2.transform(m: mat3) -> vec2
 ```
