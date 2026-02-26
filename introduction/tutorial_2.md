@@ -845,9 +845,9 @@ To do this, we'll first need to make the battery level a global variable, so tha
 
 We're going to copy these lines:
 ```python-raw
-    battery_percent = badge.battery_level()
-    battery_voltage = badge.battery_voltage()
-    total_flash, used_flash, _ = badge.disk_free("/system")
+battery_percent = badge.battery_level()
+battery_voltage = badge.battery_voltage()
+total_flash, used_flash, _ = badge.disk_free("/system")
 ```
 They'll be going outside `update()`, after our colours and before our `make_chart()` method. Since we're defining these variables up there now and reusing them for each cycle of `update()`, we'll need to tell `update()` not to make variables of its own, but to use the ones created when the program started. Add the following line at the very top of `update()`:
 ```python-raw
@@ -1230,7 +1230,8 @@ def update():
 
 run(update)
 ```
-Well, that's certainly done something, but it's the wrong way round - the graph is displaying when the cable is connected, and that's when we want it to disappear. We could of course just change it to `if not badge.usb_connected():`, but we want to display something else when it is connected so instead let's make this `if` into an `if...else` and put our graph drawing code into the `else` bit:
+
+Well, that's certainly done something, but it's the wrong way round - the graph is displaying when the cable is connected, and that's when we want it to disappear. We could of course just change it to `if not badge.usb_connected()`, but we want to display something else when it is connected so instead let's make this `if` into an `if...else` and put our graph drawing code into the `else` bit:
 ```python-raw
     if badge.usb_connected():
         pass
