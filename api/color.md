@@ -20,20 +20,17 @@ The premultiplied RGBA color as a 32 bit unsigned integer.
 The following static methods create new `color` objects from different colour representations.
 
 ## rgb
-Creates a new `color` from red, green, blue, and optional alpha values.
+Creates a new `color` object from red, green, blue, and optional alpha values.
 
-**Parameters**
-
+### Usage
 - `rgb(r, g, b[, a])`
     - `r, g, b`: Colour component values from 0 to 255
     - `a`: Optional alpha value from 0 to 255
 
-**Returns**
+### Returns
+`color`
 
-- A new `color` object
-
-**Example code**
-
+### Example
 ```python
 def update():
   # draw a gradient from cyan to magenta
@@ -41,27 +38,26 @@ def update():
     step = (x * 255) / 160
     screen.pen = color.rgb(step, 255 - step, 150)
     screen.line(x, 0, x, 120)
+
+run(update)
 ```
 
 ## hsv
-Creates a new `color` from hue, saturation, value, and optional alpha values.
+Creates a new `color` object from hue, saturation, value, and optional alpha values.
 
 HSV is not perceptually uniform, so equal changes in its values do not correspond to equal perceived colour changes. This can lead to uneven gradients and unintuitive results when adjusting saturation or brightness.
 
-**Parameters**
-
+### Usage
 - `hsv(h, s, v[, a])`
     - `h`: Hue from 0 to 255
     - `s`: Saturation from 0 to 255
     - `v`: Value (brightness) from 0 to 255
     - `a`: Optional alpha value from 0 to 255
 
-**Returns**
+### Returns
+`color`
 
-- A new `color` object
-
-**Example code**
-
+### Example
 ```python
 def update():
   # draw a hue gradient
@@ -71,27 +67,26 @@ def update():
     value = 255
     screen.pen = color.hsv(hue, saturation, value)
     screen.line(x, 0, x, 120)
+
+run(update)
 ```
 
 ## oklch
-Creates a new `color` from OKLCH parameters and an optional alpha value.
+Creates a new `color` object from OKLCH parameters and an optional alpha value.
 
 OKLCH is a perceptually uniform colour space, meaning equal changes in its values produce more consistent visual changes. This makes it better suited for colour adjustment and interpolation than HSV, which can produce uneven or unexpected results.
 
-**Parameters**
-
+### Usage
 - `oklch(l, c, h[, a])`
     - `l`: Lightness from 0 to 255
     - `c`: Chroma (saturation) from 0 to 255
     - `h`: Hue from 0 to 255
     - `a`: Optional alpha value from 0 to 255
 
-**Returns**
+### Returns
+`color`
 
-- A new `color` object
-
-**Example code**
-
+### Example
 ```python
 def update():
   for x in range(0, 160):
@@ -100,6 +95,8 @@ def update():
     hue = 255 * (x / 160)
     screen.pen = color.oklch(lightness, chroma, hue)
     screen.line(x, 0, x, 120)
+
+run(update)
 ```
 # Constants
 
@@ -151,4 +148,6 @@ def update():
 
     screen.pen = palette[i]
     screen.circle(32 + (i * 6), 60, 20)
+
+run(update)
 ```
