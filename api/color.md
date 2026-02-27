@@ -98,6 +98,7 @@ def update():
 
 run(update)
 ```
+
 # Constants
 
 ## Default palette
